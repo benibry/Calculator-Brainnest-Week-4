@@ -40,9 +40,9 @@ body {
     grid-template-areas:
         ". . . . "
         "seven eight nine backspace"
-        "four five six all_clear"
-        "one two three equal"
-        "zero decimal clear equal";
+        "four five six clear"
+        "one two three all_clear"
+        "zero decimal equal equal";
 }
 
 .calculator__keys>button {
@@ -102,12 +102,12 @@ body {
 
 .equal {
     grid-area: equal;
-    background-color: rgb(134, 126, 114);
+    background-color: rgb(107, 83, 68);
 }
 
 .equal:hover,
 .equal:focus {
-    background-color: rgb(167, 156, 142);
+    background-color: rgb(58, 45, 37);
 }
 
 .operator {
