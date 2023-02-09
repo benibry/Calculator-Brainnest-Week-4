@@ -1,8 +1,16 @@
 //Javascript
-  const number_displanum2 = document.querySelector('h1');
+const number_displanum2 = document.querySelector('h1');
+const number_buttons = document.querySelectorAll('.number_button');
 
+const add_button = documentconst.querySelector('.add')
+const subtract_button = document.querySelector('.subtract')
+const multiply_button = document.querySelector('.multiply')
+const divide_button = document.querySelector('.divide')
+const equals_button = document.querySelector('.equals')
+
+
+//Stored values for calculations
 let current_number = '0';
-
 let num1 = 0;
 let num2 = 0;
 
@@ -63,11 +71,20 @@ const multiply = (x, y) => x * y;
  */
 const divide = (x, y) => y != 0 ? x / y : Infinity;
 
-
+/**
+ * Updates the number display text value
+ */
 const updateDisplay = () => {
     number_display.textContent = current_number;
 }
 
+/**
+ * 
+ * @param {string} operator operator to be used in the caldulation, use OPERATORS values
+ * @param {number} x first number of the calculation
+ * @param {number} y second number of the calculation
+ * @returns {number} Returns the result from the calculation
+ */
 const calculate = (operator, x, y) => {
     switch (operator) {
         case OPERATORS.add:
@@ -81,15 +98,22 @@ const calculate = (operator, x, y) => {
     }
 }
 
+/**
+ * Function fired by the on click event method to store the operator name that is currently being used
+ * When chaining operators before pressing equals, this method calculates and updates the current number 
+ * each time and operator is pressed after typing a number
+ * Changes between operators if operator buttons are repeated
+ * @param {string} operator_value operator name that was pressed. Use OPERATORS object values
+ */
 const handleOperatorPressed = (operator_value) => {
-    if(last_button_pressed_type !== BUTTON_TYPES.operator){
-        if(repeating_operators){
+    if (last_button_pressed_type !== BUTTON_TYPES.operator) {
+        if (repeating_operators) {
             num2 = parseFloat(current_number)
             num1 = calculate(current_operator, num1, num2);
             current_number = num1.toString()
-            
-        }else
-        num1 = parseFloat(current_number);
+
+        } else
+            num1 = parseFloat(current_number);
     }
 
     updateDisplay();
@@ -100,6 +124,14 @@ const handleOperatorPressed = (operator_value) => {
     console.log(current_operator);
 }
 
+/**
+ * Calculates the result of the operation on the 2 stored numbers
+ * When no numbers are stored, updates to 0
+ * WHen no operator is pressed after typing a number, updates to the typed in number
+ * When equals is pressed before the second number is entered, the calculation will use the first number for both values
+ * When equals is repeated the current displayed result wil be used as the first number and the second number will be reused
+ * 
+ */
 const handleEqualsPressed = () => {
     let result = 0;
     switch (last_button_pressed_type) {
@@ -130,8 +162,7 @@ const handleEqualsPressed = () => {
             break;
     }
     num2 = parseFloat(current_number);
-    //result = calculate(current_operator, num1, num2);
-    current_number = result.toString();
+    current_number = result.toString();    
     console.log(`${num1} ${current_operator} ${num2} = ${result}`);
     updateDisplay();
     last_button_pressed_type = BUTTON_TYPES.equals;
@@ -154,8 +185,12 @@ const handleEqualsPressed = () => {
 
 //What if divided bnum20
 
-
+/**
+ * Adds a string value of the number pressed to the end of the working number
+ * @param {string} string value of the number pressed
+ */
 const handleNumberPressed = (value) => {
+    //Reset the working number if last value input is finished
     if (last_button_pressed_type === BUTTON_TYPES.equals ||
         last_button_pressed_type === BUTTON_TYPES.operator) {
         current_number = '';
@@ -163,21 +198,19 @@ const handleNumberPressed = (value) => {
 
     //Remove trailing 0's
     console.log('clicked ' + value)
-
     current_number += value;
-
     updateDisplay();
     last_button_pressed_type = BUTTON_TYPES.digit;
 }
 
-document.querySelector('.add').addEventListener('click', () => handleOperatorPressed(OPERATORS.add))
-document.querySelector('.subtract').addEventListener('click', () => handleOperatorPressed(OPERATORS.subtract))
-document.querySelector('.multiply').addEventListener('click', () => handleOperatorPressed(OPERATORS.multiply))
-document.querySelector('.divide').addEventListener('click', () => handleOperatorPressed(OPERATORS.divide))
-document.querySelector('.equals').addEventListener('click', handleEqualsPressed)
+//Button event listeners
+add_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.add))
+subtract_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.subtract))
+multiply_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.multiply))
+divide_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.divide))
+equals_button.addEventListener('click', handleEqualsPressed)
 
-const number_buttons = document.querySelectorAll('.number_button');
+//Add event listeners for each number button
 number_buttons.forEach((button, index) => {
     button.addEventListener('click', () => handleNumberPressed(index));
-
 })
