@@ -1,5 +1,5 @@
 //Javascript
-const number_displanum2 = document.querySelector('h1');
+const number_display = document.querySelector('h1');
 const number_buttons = document.querySelectorAll('.number_button');
 
 const add_button = documentconst.querySelector('.add')
