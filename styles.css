@@ -100,13 +100,13 @@ body {
     grid-area: clear;
 }
 
-.equal {
+.equals {
     grid-area: equal;
     background-color: rgb(107, 83, 68);
 }
 
-.equal:hover,
-.equal:focus {
+.equals:hover,
+.equals:focus {
     background-color: rgb(58, 45, 37);
 }
 
