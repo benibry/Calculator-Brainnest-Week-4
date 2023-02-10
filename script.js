@@ -180,6 +180,8 @@ const handleEqualsPressed = () => {
 //handle all clear button
 const handleAllClear = () => {
     current_number = '0';
+    num1 = '0';
+    num2 = '0';
     console.log('all clear')
     updateDisplay();
 }
@@ -187,7 +189,8 @@ const handleAllClear = () => {
 //handle clear button pressed
 
 const handleClear = () => {
-    current_number = '0';
+    current_number = num1;
+    num2 = '';
     console.log('clear')
     updateDisplay();
 }
