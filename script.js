@@ -2,9 +2,11 @@
 const number_display = document.querySelector('.calculator__display');
 const number_buttons = document.querySelectorAll('.number');
 
-const add_button = document.querySelector('.plus')
-const subtract_button = document.querySelector('.minus')
-const multiply_button = document.querySelector('.times')
+console.log()
+const add_button = document.querySelector('.add')
+const subtract_button = document.querySelector('.subtract')
+const multiply_button = document.querySelector('.multiply')
+
 const divide_button = document.querySelector('.divide')
 const equals_button = document.querySelector('.equal')
 
@@ -212,5 +214,7 @@ equals_button.addEventListener('click', handleEqualsPressed)
 
 //Add event listeners for each number button
 number_buttons.forEach((button, index) => {
+first-script
     button.addEventListener('click', () => handleNumberPressed((index + 1)%10));
+
 })
