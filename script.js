@@ -197,10 +197,15 @@ const handleNumberPressed = (value) => {
         last_button_pressed_type === BUTTON_TYPES.operator) {
         current_number = '';
     }
-
-    //Remove trailing 0's
     console.log('clicked ' + value)
-    current_number += value;
+
+    //Prevent trailing 0's
+    if(current_number === '0'){
+        current_number = value.toString();
+    }else{
+        current_number += value;
+    }
+
     updateDisplay();
     last_button_pressed_type = BUTTON_TYPES.digit;
 }
