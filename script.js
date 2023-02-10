@@ -2,15 +2,16 @@
 const number_display = document.querySelector('.calculator__display');
 const number_buttons = document.querySelectorAll('.number');
 
+
 console.log()
 const add_button = document.querySelector('.add')
 const subtract_button = document.querySelector('.subtract')
 const multiply_button = document.querySelector('.multiply')
-
 const divide_button = document.querySelector('.divide')
 const equals_button = document.querySelector('.equals')
 const ac_button = document.querySelector('.all_clear')
 const clear_button = document.querySelector('.clear')
+const decimal_button = document.querySelector('.decimal')
 
 //Stored values for calculations
 let current_number = '0';
@@ -34,6 +35,7 @@ const BUTTON_TYPES = {
     operator: 'operator',
     equals: 'equals',
     clear: 'clear',
+    decimal: 'decimal',
     aclear: 'aclear',
     none: 'none'
 }
@@ -174,6 +176,12 @@ const handleEqualsPressed = () => {
 }
 
 //handle decimal pressed
+const handleDecimal = () => {
+    current_number += '.';
+    console.log('decimal');
+    updateDisplay();
+}
+
 
 
 //clears current working number
@@ -235,8 +243,10 @@ subtract_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.
 multiply_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.multiply))
 divide_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.divide))
 equals_button.addEventListener('click', handleEqualsPressed)
+decimal_button.addEventListener('click', () => handleDecimal(BUTTON_TYPES.decimal))
 ac_button.addEventListener('click', () => handleAllClear(BUTTON_TYPES.aclear))
 clear_button.addEventListener('click', () => handleClear(BUTTON_TYPES.clear))
+
 
 //Add event listeners for each number button
 number_buttons.forEach((button, index) => {
