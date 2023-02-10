@@ -2,13 +2,16 @@
 const number_display = document.querySelector('.calculator__display');
 const number_buttons = document.querySelectorAll('.number');
 
-const add_button = document.querySelector('.plus')
-const subtract_button = document.querySelector('.minus')
-const multiply_button = document.querySelector('.times')
-const divide_button = document.querySelector('.divide')
-const equals_button = document.querySelector('.equal')
-const decimal_button = document.querySelector('.decimal')
 
+console.log()
+const add_button = document.querySelector('.add')
+const subtract_button = document.querySelector('.subtract')
+const multiply_button = document.querySelector('.multiply')
+const divide_button = document.querySelector('.divide')
+const equals_button = document.querySelector('.equals')
+const ac_button = document.querySelector('.all_clear')
+const clear_button = document.querySelector('.clear')
+const decimal_button = document.querySelector('.decimal')
 
 //Stored values for calculations
 let current_number = '0';
@@ -33,6 +36,7 @@ const BUTTON_TYPES = {
     equals: 'equals',
     clear: 'clear',
     decimal: 'decimal',
+    aclear: 'aclear',
     none: 'none'
 }
 
@@ -164,7 +168,7 @@ const handleEqualsPressed = () => {
             break;
     }
     num2 = parseFloat(current_number);
-    current_number = result.toString();    
+    current_number = result.toString();
     console.log(`${num1} ${current_operator} ${num2} = ${result}`);
     updateDisplay();
     last_button_pressed_type = BUTTON_TYPES.equals;
@@ -179,10 +183,25 @@ const handleDecimal = () => {
 }
 
 
-//handle clear button pressed
-//clears current working number
 
+//clears current working number
 //handle all clear button
+const handleAllClear = () => {
+    current_number = '0';
+    num1 = '0';
+    num2 = '0';
+    console.log('all clear')
+    updateDisplay();
+}
+
+//handle clear button pressed
+
+const handleClear = () => {
+    current_number = '0';
+    console.log('clear')
+    updateDisplay();
+}
+
 //Clears num1and num2and current working number
 
 //handle backspace pressed
@@ -203,13 +222,20 @@ const handleNumberPressed = (value) => {
         last_button_pressed_type === BUTTON_TYPES.operator) {
         current_number = '';
     }
-
-    //Remove trailing 0's
     console.log('clicked ' + value)
-    current_number += value;
+
+    //Prevent trailing 0's
+    if (current_number === '0') {
+        current_number = value.toString();
+    } else {
+        current_number += value;
+    }
+
     updateDisplay();
     last_button_pressed_type = BUTTON_TYPES.digit;
 }
+
+
 
 //Button event listeners
 add_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.add))
@@ -218,8 +244,13 @@ multiply_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.
 divide_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.divide))
 equals_button.addEventListener('click', handleEqualsPressed)
 decimal_button.addEventListener('click', () => handleDecimal(BUTTON_TYPES.decimal))
+ac_button.addEventListener('click', () => handleAllClear(BUTTON_TYPES.aclear))
+clear_button.addEventListener('click', () => handleClear(BUTTON_TYPES.clear))
+
 
 //Add event listeners for each number button
 number_buttons.forEach((button, index) => {
-    button.addEventListener('click', () => handleNumberPressed((index + 1)%10));
+    button.addEventListener('click', () => handleNumberPressed((index + 1) % 10));
+
 })
+
