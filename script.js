@@ -8,7 +8,7 @@ const subtract_button = document.querySelector('.subtract')
 const multiply_button = document.querySelector('.multiply')
 
 const divide_button = document.querySelector('.divide')
-const equals_button = document.querySelector('.equal')
+const equals_button = document.querySelector('.equals')
 
 
 //Stored values for calculations
