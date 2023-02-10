@@ -163,6 +163,7 @@ const handleEqualsPressed = () => {
             result = calculate(current_operator, num1, num2);
             break;
         case BUTTON_TYPES.clear:
+        case BUTTON_TYPES.decimal:
         case BUTTON_TYPES.none:
             result = parseFloat(current_number);
             break;
@@ -177,8 +178,11 @@ const handleEqualsPressed = () => {
 
 //handle decimal pressed
 const handleDecimal = () => {
-    current_number += '.';
+    if (!current_number.includes('.')){
+        current_number += '.';
+    }
     console.log('decimal');
+    console.log(current_number);
     updateDisplay();
 }
 
