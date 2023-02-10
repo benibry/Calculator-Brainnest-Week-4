@@ -214,7 +214,6 @@ equals_button.addEventListener('click', handleEqualsPressed)
 
 //Add event listeners for each number button
 number_buttons.forEach((button, index) => {
-first-script
     button.addEventListener('click', () => handleNumberPressed((index + 1)%10));
 
 })
