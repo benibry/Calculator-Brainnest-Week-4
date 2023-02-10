@@ -7,6 +7,7 @@ const subtract_button = document.querySelector('.minus')
 const multiply_button = document.querySelector('.times')
 const divide_button = document.querySelector('.divide')
 const equals_button = document.querySelector('.equal')
+const decimal_button = document.querySelector('.decimal')
 
 
 //Stored values for calculations
@@ -31,6 +32,7 @@ const BUTTON_TYPES = {
     operator: 'operator',
     equals: 'equals',
     clear: 'clear',
+    decimal: 'decimal',
     none: 'none'
 }
 
@@ -170,6 +172,12 @@ const handleEqualsPressed = () => {
 }
 
 //handle decimal pressed
+const handleDecimal = () => {
+    current_number += '.';
+    console.log('decimal');
+    updateDisplay();
+}
+
 
 //handle clear button pressed
 //clears current working number
@@ -209,6 +217,7 @@ subtract_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.
 multiply_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.multiply))
 divide_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.divide))
 equals_button.addEventListener('click', handleEqualsPressed)
+decimal_button.addEventListener('click', () => handleDecimal(BUTTON_TYPES.decimal))
 
 //Add event listeners for each number button
 number_buttons.forEach((button, index) => {
