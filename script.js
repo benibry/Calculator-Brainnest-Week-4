@@ -189,8 +189,7 @@ const handleAllClear = () => {
 //handle clear button pressed
 
 const handleClear = () => {
-    current_number = num1;
-    num2 = '';
+    current_number = '0';
     console.log('clear')
     updateDisplay();
 }
