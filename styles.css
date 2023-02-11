@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: linear-gradient(236deg, #f8ecc9, #594c49);
+    background-image: linear-gradient(250deg, #f8ecc9, #594c49);
 }
 
 /* Calculator */
@@ -19,9 +19,6 @@ body {
     box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.5);
     border-radius: 0.25em;
     overflow: hidden;
-
-
-
 }
 
 .calculator__display {
@@ -45,7 +42,7 @@ body {
         "zero decimal equal equal";
 }
 
-.calculator__keys>button {
+.calculator__keys > button {
     border: 0;
     padding: 0.75rem 1rem;
 
@@ -107,7 +104,7 @@ body {
 
 .equals:hover,
 .equals:focus {
-    background-color: rgb(58, 45, 37);
+    background-color: rgb(112, 92, 79);
 }
 
 .decimal {
