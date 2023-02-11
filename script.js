@@ -9,9 +9,11 @@ const subtract_button = document.querySelector('.subtract')
 const multiply_button = document.querySelector('.multiply')
 const divide_button = document.querySelector('.divide')
 const equals_button = document.querySelector('.equals')
+
 const ac_button = document.querySelector('.all_clear')
 const clear_button = document.querySelector('.clear')
 const decimal_button = document.querySelector('.decimal')
+const backspace_button = document.querySelector('.backspace')
 
 //Stored values for calculations
 let current_number = '0';
@@ -37,6 +39,7 @@ const BUTTON_TYPES = {
     clear: 'clear',
     decimal: 'decimal',
     aclear: 'aclear',
+    backspace: 'backspace',
     none: 'none'
 }
 
@@ -200,10 +203,18 @@ const handleAllClear = () => {
 
 //handle clear button pressed
 
+//handle all clear button
 const handleClear = () => {
     current_number = '0';
     console.log('clear')
     updateDisplay();
+}
+
+const handleBackspace = () => {
+    current_number = current_number.slice(0, -1)
+    console.log('backspace')
+
+  updateDisplay()
 }
 
 //Clears num1and num2and current working number
@@ -250,6 +261,8 @@ equals_button.addEventListener('click', handleEqualsPressed)
 decimal_button.addEventListener('click', () => handleDecimal(BUTTON_TYPES.decimal))
 ac_button.addEventListener('click', () => handleAllClear(BUTTON_TYPES.aclear))
 clear_button.addEventListener('click', () => handleClear(BUTTON_TYPES.clear))
+backspace_button.addEventListener('click', () => handleBackspace(BUTTON_TYPES.backspace))
+
 
 
 //Add event listeners for each number button
