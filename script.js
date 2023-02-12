@@ -327,5 +327,8 @@ document.addEventListener('keydown', (event) => {
 
             handleEqualsPressed()
             break;
+        case "Backspace":
+            handleBackspace();
+            break;
     }
 });
