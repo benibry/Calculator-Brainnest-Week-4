@@ -185,7 +185,6 @@ const handleDecimal = () => {
         current_number += '.';
     }
     console.log('decimal');
-    console.log(current_number);
     updateDisplay();
 }
 
@@ -197,7 +196,7 @@ const handleAllClear = () => {
     current_number = '0';
     num1 = '0';
     num2 = '0';
-    console.log('all clear')
+    console.log('all clear');
     updateDisplay();
 }
 
@@ -206,21 +205,26 @@ const handleAllClear = () => {
 //handle all clear button
 const handleClear = () => {
     current_number = '0';
-    console.log('clear')
+    console.log('clear');
     updateDisplay();
 }
 
+//handle backspace pressed
+//removes one character from end of current_number
+//when last character is removed, the current number is 0
 const handleBackspace = () => {
-    current_number = current_number.slice(0, -1)
-    console.log('backspace')
+    if (current_number.length > 1){
+        current_number = current_number.slice(0, -1);
+    }
+    else {
+        current_number = '0';
+    }
+    console.log('backspace');
 
-  updateDisplay()
+    updateDisplay();
 }
 
 //Clears num1and num2and current working number
-
-//handle backspace pressed
-//removes one character from end of current_number
 
 //After equals clicked keep the result as current working number
 //After equals clicked and starting to type a new number it should start working with a brand new number
