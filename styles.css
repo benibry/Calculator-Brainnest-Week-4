@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-
-
-
-
 html {
     font-size: 150%;
     font-weight: 300;
@@ -25,7 +21,7 @@ body {
 /* Calculator */
 
 .calculator {
-    box-shadow: 10px 5px 5px black;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.681);
     border-radius: 0.25em;
     overflow: hidden;
 }
