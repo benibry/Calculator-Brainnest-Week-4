@@ -25,7 +25,7 @@ body {
 /* Calculator */
 
 .calculator {
-    box-shadow: 10px 5px 5px black;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.681);
     border-radius: 0.25em;
     overflow: hidden;
 }
