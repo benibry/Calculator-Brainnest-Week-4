@@ -333,6 +333,9 @@ document.addEventListener('keydown', (event) => {
         case '.':
             handleDecimal()
             break;
+        case '+/-':
+            handleNegate();
+            break;
         case '0':
             handleNumberPressed(0)
             break;
