@@ -274,3 +274,58 @@ backspace_button.addEventListener('click', () => handleBackspace(BUTTON_TYPES.ba
 number_buttons.forEach((button, index) => {
     button.addEventListener('click', () => handleNumberPressed((index + 1) % 10));
 })
+
+document.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case '1':
+            handleNumberPressed(1)
+            break;
+        case '2':
+            handleNumberPressed(2)
+            break;
+        case '3':
+            handleNumberPressed(3)
+            break;
+        case '4':
+            handleNumberPressed(4)
+            break;
+        case '5':
+            handleNumberPressed(5)
+            break;
+        case '6':
+            handleNumberPressed(6)
+            break;
+        case '7':
+            handleNumberPressed(7)
+            break;
+        case '8':
+            handleNumberPressed(8)
+            break;
+        case '9':
+            handleNumberPressed(9)
+            break;
+        case '/':
+            handleOperatorPressed(OPERATORS.divide);
+            break;
+        case '*':
+            handleOperatorPressed(OPERATORS.multiply);
+            break;
+        case '-':
+            handleOperatorPressed(OPERATORS.subtract);
+            break;
+        case '+':
+            handleOperatorPressed(OPERATORS.add);
+            break;
+        case '.':
+            handleDecimal()
+            break;
+        case '0':
+            handleNumberPressed(0)
+            break;
+        case '=':
+        case 'Enter':
+
+            handleEqualsPressed()
+            break;
+    }
+});
