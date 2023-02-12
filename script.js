@@ -25,7 +25,7 @@ let num2 = 0;
 const OPERATORS = {
     add: '+',
     subtract: '-',
-    multiply: '*',
+    multiply: 'x',
     divide: '÷',
     none: 'none'
 }
@@ -85,11 +85,12 @@ const divide = (x, y) => y != 0 ? x / y : Infinity;
  * Updates the number display text value
  */
 const updateDisplay = () => {
-    number_display.textContent = current_number;
-   // operation_display.textContent = num1 + current_operator + num2;
+    number_display.textContent = current_number.length > 9 ? current_number.slice(0,9) + '..' : current_number;
+    let previous_number = num1.toString();
+
     if (current_operator != 'none') {
         operation_display.textContent =
-          `${num1} ${current_operator}`
+          `${previous_number.length > 9 ? previous_number.toString().slice(0,8) + '..' : num1} ${current_operator}`
       } else {
         operation_display.textContent = ''
       }
