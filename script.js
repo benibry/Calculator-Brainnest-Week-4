@@ -11,6 +11,7 @@ const ac_button = document.querySelector('.all_clear')
 const clear_button = document.querySelector('.clear')
 const decimal_button = document.querySelector('.decimal')
 const backspace_button = document.querySelector('.backspace')
+const negate_button = document.querySelector('.negate')
 
 //Stored values for calculations
 let current_number = '0';
@@ -37,6 +38,7 @@ const BUTTON_TYPES = {
     decimal: 'decimal',
     aclear: 'aclear',
     backspace: 'backspace',
+    negate: 'negate',
     none: 'none'
 }
 
@@ -222,6 +224,17 @@ const handleClear = () => {
     updateDisplay();
 }
 
+const handleNegate = () => {
+    temp_result = parseFloat(current_number);
+    if (temp_result > 0) {
+        current_number = '-' + current_number;
+    } else {
+        current_number = current_number.substring(1);
+    }
+    console.log('negative');
+    updateDisplay();
+}
+
 //Removes one character from end of current_number
 //When last character is removed, the current number is 0
 const handleBackspace = () => {
@@ -269,6 +282,7 @@ decimal_button.addEventListener('click', () => handleDecimal(BUTTON_TYPES.decima
 ac_button.addEventListener('click', () => handleAllClear(BUTTON_TYPES.aclear))
 clear_button.addEventListener('click', () => handleClear(BUTTON_TYPES.clear))
 backspace_button.addEventListener('click', () => handleBackspace(BUTTON_TYPES.backspace))
+negate_button.addEventListener('click', () => handleNegate(BUTTON_TYPES.negate))
 
 //Add event listeners for each number button
 number_buttons.forEach((button, index) => {
