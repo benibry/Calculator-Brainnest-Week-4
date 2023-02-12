@@ -225,13 +225,13 @@ const handleClear = () => {
 }
 
 const handleNegate = () => {
-    temp_result = parseFloat(current_number);
-    if (temp_result > 0) {
+    if (!current_number.includes('-')) {
         current_number = '-' + current_number;
+        console.log('negative');
     } else {
         current_number = current_number.substring(1);
+        console.log('positive');
     }
-    console.log('negative');
     updateDisplay();
 }
 

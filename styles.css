@@ -114,12 +114,13 @@ body {
 
 .negate {
     grid-area: negate;
-    background-color: rgb(241, 187, 186);
+    color: #f4f3e7;
+    background-image: linear-gradient(46deg, #7d807c, #697068);
 }
 
 .negate:hover,
 .negate:focus {
-    background-color: rgb(239, 159, 159);
+    background-image: linear-gradient(46deg, #697068, #7d807c);
 }
 
 .all_clear {
