@@ -21,7 +21,7 @@ body {
 /* Calculator */
 
 .calculator {
-    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.681);
+    box-shadow: 0.625rem 0.313rem 0.313rem rgba(0, 0, 0, 0.681);
     border-radius: 0.25em;
     overflow: hidden;
 }
@@ -32,7 +32,6 @@ body {
     padding: 0.75rem 1rem;
     text-align: right;
     font-size: calc(1rem * .9 * .9);
-
     min-height: 3em;
 }
 
@@ -44,7 +43,7 @@ body {
     background-color: #302e29;
     display: grid;
     grid-template-columns: repeat(4, auto);
-    grid-gap: 1px;
+    grid-gap: 0.0625em;
     grid-template-areas:
         ". . . . "
         "seven eight nine backspace"
