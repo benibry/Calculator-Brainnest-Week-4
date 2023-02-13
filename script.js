@@ -206,6 +206,7 @@ const handleAllClear = () => {
     current_number = '0';
     num1 = 0;
     num2 = 0;
+    repeating_operators = false;
     current_operator = OPERATORS.none;
     console.log('all clear');
     updateDisplay();
