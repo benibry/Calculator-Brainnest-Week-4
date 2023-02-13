@@ -1,5 +1,6 @@
 //Javascript
-const number_display = document.querySelector('.calculator__display');
+const number_display = document.querySelector('.current_number');
+const operation_display = document.querySelector('.operation_display');
 const number_buttons = document.querySelectorAll('.number');
 
 
@@ -22,10 +23,10 @@ let num2 = 0;
 
 //List of valid operators
 const OPERATORS = {
-    add: 'add',
-    subtract: 'subtract',
-    multiply: 'multiply',
-    divide: 'divide',
+    add: '+',
+    subtract: '-',
+    multiply: '*',
+    divide: '÷',
     none: 'none'
 }
 
@@ -85,6 +86,13 @@ const divide = (x, y) => y != 0 ? x / y : Infinity;
  */
 const updateDisplay = () => {
     number_display.textContent = current_number;
+   // operation_display.textContent = num1 + current_operator + num2;
+    if (current_operator != 'none') {
+        operation_display.textContent =
+          `${num1} ${current_operator}`
+      } else {
+        operation_display.textContent = ''
+      }
 }
 
 /**
@@ -125,12 +133,14 @@ const handleOperatorPressed = (operator_value) => {
             num1 = parseFloat(current_number);
     }
 
-    updateDisplay();
+    
     current_operator = operator_value;
+    
     last_button_pressed_type = BUTTON_TYPES.operator;
 
     repeating_operators = true;
     console.log(current_operator);
+    updateDisplay();
 }
 
 /**
@@ -194,8 +204,9 @@ const handleDecimal = () => {
 //handle all clear button
 const handleAllClear = () => {
     current_number = '0';
-    num1 = '0';
-    num2 = '0';
+    num1 = 0;
+    num2 = 0;
+    current_operator = OPERATORS.none;
     console.log('all clear');
     updateDisplay();
 }
