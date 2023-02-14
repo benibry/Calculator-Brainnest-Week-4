@@ -46,6 +46,7 @@ body {
     grid-gap: 0.0625em;
     grid-template-areas:
         ". . . . "
+        ". . . . "
         "seven eight nine backspace"
         "four five six clear"
         "one two three all_clear"
@@ -54,7 +55,9 @@ body {
 
 .calculator__keys>button {
     border: 0;
-    padding: 0.75rem 1rem;
+    min-height: 50px;
+    min-width: 75px;
+    padding: auto auto;
     font-family: 'Orbitron', Arial, Helvetica, sans-serif;
 
 }
