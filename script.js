@@ -12,11 +12,16 @@ const clear_button = document.querySelector('.clear')
 const decimal_button = document.querySelector('.decimal')
 const backspace_button = document.querySelector('.backspace')
 const negate_button = document.querySelector('.negate')
+const memory_recall_button = document.querySelector('.memory_recall')
+const memory_add_button = document.querySelector('.memory_add')
+const memory_subtract_button = document.querySelector('.memory_subtract')
+const percentage_button = document.querySelector('.percentage')
 
 //Stored values for calculations
 let current_number = '0';
 let num1 = 0;
 let num2 = 0;
+let memory_number = 0;
 
 //List of valid operators
 const OPERATORS = {
@@ -24,6 +29,7 @@ const OPERATORS = {
     subtract: '-',
     multiply: 'x',
     divide: '÷',
+    percentage: '%',
     none: 'none'
 }
 
@@ -95,7 +101,7 @@ const divide = (x, y) => y != 0 ? x / y : Infinity;
  * Updates the number display text value
  */
 const updateDisplay = () => {
-    number_display.textContent = current_number.length > 9
+    number_display.textContent = current_number.length > 12
         ? parseFloat(current_number).toExponential(9).toString()
         : current_number;
     if (current_operator != 'none') {
@@ -123,6 +129,14 @@ const calculate = (operator, x, y) => {
             return multiply(x, y);
         case OPERATORS.divide:
             return divide(x, y);
+        case OPERATORS.percentage:
+            if (current_operator === OPERATORS.multiply || current_operator === OPERATORS.divide) {
+                return y / 100;
+            } else if (current_operator === OPERATORS.add || current_operator === OPERATORS.subtract) {
+                return (x * y) / 100;
+            }
+        default:
+            return x;
     }
 }
 
@@ -166,6 +180,7 @@ const handleEqualsPressed = () => {
             result = 0;
             break;
         case BUTTON_TYPES.digit:
+            //No operator pressed yet
             if (current_operator === OPERATORS.none) {
                 result = current_number;
             }
@@ -174,9 +189,8 @@ const handleEqualsPressed = () => {
                 result = calculate(current_operator, num1, num2);
             }
             break;
+        //Chaining equals operator
         case BUTTON_TYPES.operator:
-            num1 = parseFloat(current_number);
-            num2 = parseFloat(current_number);
             result = calculate(current_operator, num1, num2);
             break;
         case BUTTON_TYPES.equals:
@@ -189,7 +203,8 @@ const handleEqualsPressed = () => {
             result = parseFloat(current_number);
             break;
     }
-    num2 = parseFloat(current_number);
+    if (last_button_pressed_type !== BUTTON_TYPES.equals)
+        num2 = parseFloat(current_number);
     current_number = result.toString();
     console.log(`${num1} ${current_operator} ${num2} = ${result}`);
     updateDisplay();
@@ -254,12 +269,15 @@ const handleBackspace = () => {
  * @param {string} string value of the number pressed
  */
 const handleNumberPressed = (value) => {
+    //console.log('clicked ' + value)
     //Reset the working number if last value input is finished
     if (last_button_pressed_type === BUTTON_TYPES.equals ||
         last_button_pressed_type === BUTTON_TYPES.operator) {
         current_number = '';
+    } else if (current_number.length >= 12) {
+        console.log('Input number length too long to increase.')
+        return;
     }
-    //console.log('clicked ' + value)
 
     //Prevent trailing 0's
     if (current_number === '0') {
@@ -272,6 +290,35 @@ const handleNumberPressed = (value) => {
     last_button_pressed_type = BUTTON_TYPES.digit;
 }
 
+//Gets and sets current_number to memory_number
+const handleMemoryRecallPressed = () => {
+    current_number = memory_number.toString();
+    console.log("Memory recall - Current Value: " + memory_number)
+    updateDisplay();
+};
+
+//Adds current_number to memory_number
+const handleMemoryAddPressed = () => {
+    memory_number += parseFloat(current_number);
+    console.log("Memory add - Current Value: " + memory_number)
+};
+
+//Subtracts current_number from memory_number
+const handleMemorySubtractPressed = () => {
+    memory_number -= parseFloat(current_number);
+    console.log("Memory subtract - Current Value: " + memory_number)
+};
+
+//Changes current_number to the provided percentage value calculation
+const handlePercentPressed = () => {
+    let percent = current_number;
+    let result = calculate(OPERATORS.percentage, num1, percent);
+
+    last_button_pressed_type = BUTTON_TYPES.operator;
+    current_number = result.toString();
+    updateDisplay();
+};
+
 //Button event listeners
 add_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.add))
 subtract_button.addEventListener('click', () => handleOperatorPressed(OPERATORS.subtract))
@@ -283,6 +330,10 @@ ac_button.addEventListener('click', () => handleAllClear(BUTTON_TYPES.aclear))
 clear_button.addEventListener('click', () => handleClear(BUTTON_TYPES.clear))
 backspace_button.addEventListener('click', () => handleBackspace(BUTTON_TYPES.backspace))
 negate_button.addEventListener('click', () => handleNegate(BUTTON_TYPES.negate))
+memory_recall_button.addEventListener('click', handleMemoryRecallPressed)
+memory_add_button.addEventListener('click', handleMemoryAddPressed)
+memory_subtract_button.addEventListener('click', handleMemorySubtractPressed)
+percentage_button.addEventListener('click', handlePercentPressed)
 
 //Add event listeners for each number button
 number_buttons.forEach((button, index) => {
